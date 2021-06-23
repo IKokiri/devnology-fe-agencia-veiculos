@@ -28,6 +28,8 @@
 
 ## Buscas
 
+- https://pt-br.reactjs.org/
+
 ## Como rodar essa aplicação
 
 ## Como fazer o deploy da aplicação
