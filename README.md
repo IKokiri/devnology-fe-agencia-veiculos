@@ -3,6 +3,9 @@
 
 
 ## Escolhas
+- REACTJS: frameworks com funções complexas, mas tambem pode ser usado de forma básica abstraindo implementações de uma aplicação SPA, por exemplo.
+
+- SPA: Entrega uma experiencia melhor para o usuário.
 
 - VSCode: editor leve versátil e versátil, funciona muito bem com a linguagem de desenvolvimento escolhida para o projeto.
 
