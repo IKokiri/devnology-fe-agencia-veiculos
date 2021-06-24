@@ -1,8 +1,8 @@
-import Marca from './components/Marca/Marca'
+import Base from './components/Base/Base'
 function App() {
   return (
     <>
-      <Marca />
+      <Base />
     </>
   );
 }
