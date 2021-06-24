@@ -11,6 +11,8 @@
 
 - Heroku: Trabalhaei academicamente com a Plataforma fazendo deploy de aplicações. A escolha dessa plataforma é que identifiquei uma facilidade no deploy junto ao Github, facilidade comparada ao Azure, onde efetuei poucos testes acadêmicos. Mais uma vez, a escolha foi baseada em preferencia e experiência.
 
+- Material UI: Ajuda com o uso de uma linguagem de design bem desenvilvido. Entrega facilidade ao desenvolver um layout responsivel junto com uma ajuda para entregar uma interface visual com qualidade para o usuário. Tem uma documentação ótima em vários idiomas.
+
 ## Problemas / Soluções durante o desenvolvimento
 
 
