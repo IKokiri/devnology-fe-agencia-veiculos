@@ -1,9 +1,119 @@
+import React, { useState, useEffect } from 'react';
+import Cartao from '../../components/Cartao/Cartao'
+import { API } from './API'
+import EditarIcon from '@material-ui/icons/CreateOutlined';
+import RemoverIcon from '@material-ui/icons/DeleteOutlined';
+import Grid from '@material-ui/core/Grid';
+import AddIcon from '@material-ui/icons/AddOutlined';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+
 function Marca() {
-  return (
-    <>
-      Marca
-    </>
-  );
+
+    const [items, setItems] = useState([]);
+    const [marca, setMarca] = useState('');
+
+    useEffect(() => {
+        buscarTodos();
+    }, []);
+
+    const buscarTodos = async () => {
+        const results = await API.get();
+        setItems(results)
+    };
+
+    const remover = (id) => {
+        deletar(id)
+    }
+
+    const deletar = async (id) => {
+        await API.delete(id)
+        buscarTodos()
+    };
+
+    const create = async () => {
+        const obj = {
+            "marca": marca
+        }
+        await API.create(obj)
+        buscarTodos()
+        setOpen(false);
+    };
+    /**
+     * Modal
+     */
+    const [open, setOpen] = React.useState(false);
+
+    const addItem = () => {
+        setOpen(true);
+    };
+
+    const editItem = (id) => {
+        setOpen(true);
+    };
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+
+    return (
+        <>
+            <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+                <DialogTitle id="form-dialog-title">Registro</DialogTitle>
+                <DialogContent>
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="marca"
+                        label="Marca"
+                        type="text"
+                        fullWidth
+                        onChange={event => setMarca(event.target.value)}
+                    />
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClose} color="primary">
+                        Sair
+                    </Button>
+                    <Button onClick={create} color="primary">
+                        Salvar
+                    </Button>
+                </DialogActions>
+            </Dialog>
+
+            <Grid container spacing={4}>
+
+                <Grid item xs={12} sm={6} md={6} lg={4}>
+                    <Cartao
+                        color="#2194f3"
+                        iconPrincipal={<AddIcon />}
+                        funcPri={() => addItem()}
+                        titulo="Adicionar"
+                        subtitulo='Marcas'
+                    />
+                </Grid>
+                {
+                    items.map((i) => {
+                        return <Grid key={i.id} item xs={12} sm={6} md={6} lg={4}>
+                            <Cartao
+                                key={i.id}
+                                iconPrincipal={<EditarIcon />}
+                                iconSecundario={<RemoverIcon />}
+                                funcPri={() => editItem(i.id)}
+                                funcSec={() => remover(i.id)}
+                                titulo={i.marca}
+                                subtitulo='Marcas'
+                            />
+                        </Grid>
+                    })
+                }
+            </Grid>
+        </>
+    );
 }
 
 export default Marca;

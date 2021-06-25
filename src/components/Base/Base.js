@@ -15,7 +15,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import MailIcon from '@material-ui/icons/Mail';
+import MarcaIcon from '@material-ui/icons/BrandingWatermark';
 import Marca from '../../pages/Marca/Marca'
 import Modelo from '../../pages/Modelo/Modelo'
 import {
@@ -151,14 +151,8 @@ export default function Nav() {
           <Divider />
           <List>
             <ListItem button component={Link} to="/marca">
-              <ListItemIcon><MailIcon /></ListItemIcon>
+              <ListItemIcon><MarcaIcon /></ListItemIcon>
               <ListItemText primary="Marca" />
-            </ListItem>
-          </List>
-          <List>
-            <ListItem button component={Link} to="/modelo">
-              <ListItemIcon><MailIcon /></ListItemIcon>
-              <ListItemText primary="Modelo" />
             </ListItem>
           </List>
         </Drawer>
