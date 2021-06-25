@@ -49,9 +49,9 @@ export class API {
 
     }
 
-    static async getId(data) {
+    static async getId(id) {
         try {
-            const response = await fetch(`http://localhost:4000/gestor/${rota}/1.0/` + data);
+            const response = await fetch(`${rota}/` + id);
             const responseJson = await response.json();
             return responseJson;
         } catch (e) {
@@ -61,7 +61,7 @@ export class API {
 
     static async update(data) {
 
-        const response = await fetch(`http://localhost:4000/gestor/${rota}/1.0/` + data.id, {
+        const response = await fetch(`${rota}/` + data.id, {
             method: 'PUT',
             headers: {
                 'Accept': 'application/json',

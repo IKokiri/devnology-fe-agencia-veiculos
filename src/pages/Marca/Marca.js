@@ -15,7 +15,9 @@ import TextField from '@material-ui/core/TextField';
 function Marca() {
 
     const [items, setItems] = useState([]);
+
     const [marca, setMarca] = useState('');
+    const [id, setId] = useState('');
 
     useEffect(() => {
         buscarTodos();
@@ -41,8 +43,45 @@ function Marca() {
         }
         await API.create(obj)
         buscarTodos()
+        limparCampos()
         setOpen(false);
     };
+
+    const update = async () => {
+        const obj = {
+            "id": id,
+            "marca": marca
+        }
+        await API.update(obj)
+        buscarTodos()
+        limparCampos()
+        setOpen(false);
+    };
+
+    const buscarUm = async (id) => {
+        const obj = await API.getId(id)
+        return obj;
+    };
+
+    /**
+     * Local
+     */
+    const preencherCampos = (obj) => {
+        setMarca(obj.marca)
+        setId(obj.id)
+    }
+
+
+    const limparCampos = () => {
+        setMarca('')
+        setId('')
+    }
+
+    const salvar = () => {
+        !id ? create() : update()
+    }
+
+
     /**
      * Modal
      */
@@ -52,10 +91,13 @@ function Marca() {
         setOpen(true);
     };
 
-    const editItem = (id) => {
+    const editItem = async (id) => {
+        let obj = await buscarUm(id);
+        preencherCampos(obj)
         setOpen(true);
     };
     const handleClose = () => {
+        limparCampos()
         setOpen(false);
     };
 
@@ -72,6 +114,7 @@ function Marca() {
                         label="Marca"
                         type="text"
                         fullWidth
+                        value={marca}
                         onChange={event => setMarca(event.target.value)}
                     />
                 </DialogContent>
@@ -79,7 +122,7 @@ function Marca() {
                     <Button onClick={handleClose} color="primary">
                         Sair
                     </Button>
-                    <Button onClick={create} color="primary">
+                    <Button onClick={salvar} color="primary">
                         Salvar
                     </Button>
                 </DialogActions>
