@@ -13,12 +13,14 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Alerta from '../../components/Alerta/Alerta'
 
-function Modelo() {
+function Cliente() {
 
     const [items, setItems] = useState([]);
     const [copyItems, setCopyItems] = useState([]);
 
-    const [modelo, setModelo] = useState('');
+    const [nome, setNome] = useState('');
+    const [sobrenome, setSobrenome] = useState('');
+    const [email, setEmail] = useState('');
     const [id, setId] = useState('');
     /**
      * Alert
@@ -50,7 +52,9 @@ function Modelo() {
 
     const create = async () => {
         const obj = {
-            "modelo": modelo
+            "nome": nome,
+            "sobrenome": sobrenome,
+            "email": email
         }
 
         let result = await API.create(obj)
@@ -73,8 +77,11 @@ function Modelo() {
 
         const obj = {
             "id": id,
-            "modelo": modelo
+            "nome": nome,
+            "sobrenome": sobrenome,
+            "email": email,
         }
+
         let result = await API.update(obj)
 
         setMessage(true)
@@ -103,14 +110,19 @@ function Modelo() {
     }
 
     const preencherCampos = (obj) => {
-        setModelo(obj.modelo)
+        setNome(obj.nome)
+        setSobrenome(obj.sobrenome)
+        setEmail(obj.email)
         setId(obj.id)
     }
 
 
     const limparCampos = () => {
-        setModelo('')
         setId('')
+        setNome('')
+        setSobrenome('')
+        setEmail('')
+
         setMessage('')
         setAlertMessage('')
         setTextPri('')
@@ -158,12 +170,11 @@ function Modelo() {
                             fullWidth
                             onChange={
                                 event => {
-
                                     let value = event.target.value.toUpperCase()
 
                                     if (value.length > 0) {
                                         setItems(copyItems.filter(function (i, n) {
-                                            return i.modelo.toUpperCase().indexOf(value) > -1
+                                            return i.nome.toUpperCase().indexOf(value) > -1
                                         }))
                                     }
                                     else {
@@ -192,12 +203,32 @@ function Modelo() {
                     <TextField
                         autoFocus
                         margin="dense"
-                        id="modelo"
-                        label="Modelo"
+                        id="nome"
+                        label="Nome"
                         type="text"
                         fullWidth
-                        value={modelo}
-                        onChange={event => setModelo(event.target.value)}
+                        value={nome}
+                        onChange={event => setNome(event.target.value)}
+                    />
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="sobrenome"
+                        label="Sobrenome"
+                        type="text"
+                        fullWidth
+                        value={sobrenome}
+                        onChange={event => setSobrenome(event.target.value)}
+                    />
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="sobrenome"
+                        label="Email"
+                        type="text"
+                        fullWidth
+                        value={email}
+                        onChange={event => setEmail(event.target.value)}
                     />
                 </DialogContent>
                 <DialogActions>
@@ -218,7 +249,7 @@ function Modelo() {
                         iconPrincipal={<AddIcon />}
                         funcPri={() => addItem()}
                         titulo="Adicionar"
-                        subtitulo='Modelos'
+                        subtitulo='Clientes'
                     />
                 </Grid>
                 {
@@ -230,8 +261,8 @@ function Modelo() {
                                 iconSecundario={<RemoverIcon />}
                                 funcPri={() => editItem(i.id)}
                                 funcSec={() => preDelete(i.id)}
-                                titulo={i.modelo}
-                                subtitulo='Modelos'
+                                titulo={i.nome}
+                                subtitulo='Clientes'
                             />
                         </Grid>
                     })
@@ -241,4 +272,4 @@ function Modelo() {
     );
 }
 
-export default Modelo;
+export default Cliente;

@@ -16,8 +16,12 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import MarcaIcon from '@material-ui/icons/BrandingWatermark';
+import ModeloIcon from '@material-ui/icons/Commute';
+import ClienteIcon from '@material-ui/icons/FaceOutlined';
+
 import Marca from '../../pages/Marca/Marca'
 import Modelo from '../../pages/Modelo/Modelo'
+import Cliente from '../../pages/Cliente/Cliente'
 import {
   BrowserRouter as Router,
   Switch,
@@ -155,8 +159,12 @@ export default function Nav() {
               <ListItemText primary="Marca" />
             </ListItem>
             <ListItem button component={Link} to="/modelo">
-              <ListItemIcon><MarcaIcon /></ListItemIcon>
+              <ListItemIcon><ModeloIcon /></ListItemIcon>
               <ListItemText primary="Modelo" />
+            </ListItem>
+            <ListItem button component={Link} to="/cliente">
+              <ListItemIcon><ClienteIcon /></ListItemIcon>
+              <ListItemText primary="Cliente" />
             </ListItem>
           </List>
         </Drawer>
@@ -169,6 +177,9 @@ export default function Nav() {
             </Route>
             <Route path="/modelo">
               <Modelo />
+            </Route>
+            <Route path="/cliente">
+              <Cliente />
             </Route>
           </Switch>
         </main>
