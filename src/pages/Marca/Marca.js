@@ -38,6 +38,7 @@ function Marca() {
 
     const remover = (id) => {
         deletar(id)
+        limparCampos()
     }
 
     const deletar = async (id) => {
@@ -56,19 +57,30 @@ function Marca() {
         limparCampos()
 
         setMessage(true)
-        setAlertMessage('criado com sucesso')
+
+        setAlertMessage('Criado com sucesso!')
+        setTextPri('Fechar')
+        
 
         setOpen(false);
     };
 
     const update = async () => {
+        
+        limparCampos()
+        
         const obj = {
             "id": id,
             "marca": marca
         }
-        await API.update(obj)
+        let result = await API.update(obj)
+
+        setMessage(true)
+
+        setAlertMessage('alterado com sucesso')
+        setTextPri('Fechar')
+        
         buscarTodos()
-        limparCampos()
         setOpen(false);
     };
 
@@ -86,7 +98,6 @@ function Marca() {
         setTextPri("Fechar")
         setTextSec("Sim")
         setId(id)
-
     }
 
     const preencherCampos = (obj) => {
@@ -98,6 +109,10 @@ function Marca() {
     const limparCampos = () => {
         setMarca('')
         setId('')
+        setMessage('')
+        setAlertMessage('')
+        setTextPri('')
+        setTextSec('')
     }
 
     const salvar = () => {
@@ -106,6 +121,7 @@ function Marca() {
 
     const removerAlert = () => {
         setMessage(false)
+        limparCampos()
     }
     /**
      * Modal
