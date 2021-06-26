@@ -16,6 +16,7 @@ import Alerta from '../../components/Alerta/Alerta'
 function Marca() {
 
     const [items, setItems] = useState([]);
+    const [copyItems, setCopyItems] = useState([]);
 
     const [marca, setMarca] = useState('');
     const [id, setId] = useState('');
@@ -34,6 +35,7 @@ function Marca() {
     const buscarTodos = async () => {
         const results = await API.get();
         setItems(results)
+        setCopyItems(results)
     };
 
     const remover = (id) => {
@@ -60,15 +62,15 @@ function Marca() {
 
         setAlertMessage('Criado com sucesso!')
         setTextPri('Fechar')
-        
+
 
         setOpen(false);
     };
 
     const update = async () => {
-        
+
         limparCampos()
-        
+
         const obj = {
             "id": id,
             "marca": marca
@@ -77,9 +79,9 @@ function Marca() {
 
         setMessage(true)
 
-        setAlertMessage('alterado com sucesso')
+        setAlertMessage('Alterado com sucesso')
         setTextPri('Fechar')
-        
+
         buscarTodos()
         setOpen(false);
     };
@@ -145,15 +147,45 @@ function Marca() {
 
     return (
         <>
-            {
-                message === true ? <Alerta
-                    funcPri={() => removerAlert()}
-                    funcSec={() => remover(id)}
-                    textPri={textPri}
-                    textSec={textSec}
-                    alertMessage={alertMessage}
-                /> : ""
-            }
+            <Grid container spacing={4}>
+                <Grid item xs={12} sm={6} md={6} lg={4}>
+                    {
+                        <TextField
+                            autoFocus
+                            margin="dense"
+                            label="BUSCAR"
+                            type="text"
+                            fullWidth
+                            onChange={
+                                event => setMarca(() => {
+
+                                    let value = event.target.value.toUpperCase()
+
+                                    if (value.length > 0) {
+                                        setItems(copyItems.filter(function (i, n) {
+                                            return i.marca.toUpperCase().indexOf(value) > -1
+                                        }))
+                                    }
+                                    else {
+                                        setItems(copyItems)
+                                    }
+                                })
+                            }
+                        />
+                    }
+                </Grid>
+                <Grid item xs={12} sm={6} md={6} lg={4}>
+                    {
+                        message === true ? <Alerta
+                            funcPri={() => removerAlert()}
+                            funcSec={() => remover(id)}
+                            textPri={textPri}
+                            textSec={textSec}
+                            alertMessage={alertMessage}
+                        /> : ""
+                    }
+                </Grid>
+            </Grid>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">Registro</DialogTitle>
                 <DialogContent>
