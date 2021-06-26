@@ -154,6 +154,10 @@ export default function Nav() {
               <ListItemIcon><MarcaIcon /></ListItemIcon>
               <ListItemText primary="Marca" />
             </ListItem>
+            <ListItem button component={Link} to="/modelo">
+              <ListItemIcon><MarcaIcon /></ListItemIcon>
+              <ListItemText primary="Modelo" />
+            </ListItem>
           </List>
         </Drawer>
 
