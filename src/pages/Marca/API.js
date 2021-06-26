@@ -41,7 +41,7 @@ export class API {
         })
             .then(response => response.json())
             .then(data => {
-
+                return data
             })
             .catch(console.error);
 

@@ -11,6 +11,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import Alerta from '../../components/Alerta/Alerta'
 
 function Marca() {
 
@@ -18,6 +19,13 @@ function Marca() {
 
     const [marca, setMarca] = useState('');
     const [id, setId] = useState('');
+    /**
+     * Alert
+     */
+    const [message, setMessage] = useState(false);
+    const [alertMessage, setAlertMessage] = useState('');
+    const [textPri, setTextPri] = useState('');
+    const [textSec, setTextSec] = useState('');
 
     useEffect(() => {
         buscarTodos();
@@ -41,9 +49,15 @@ function Marca() {
         const obj = {
             "marca": marca
         }
-        await API.create(obj)
+
+        let result = await API.create(obj)
+
         buscarTodos()
         limparCampos()
+
+        setMessage(true)
+        setAlertMessage('criado com sucesso')
+
         setOpen(false);
     };
 
@@ -66,6 +80,15 @@ function Marca() {
     /**
      * Local
      */
+    const preDelete = (id) => {
+        setMessage(true)
+        setAlertMessage("Deseja Deletar?")
+        setTextPri("Fechar")
+        setTextSec("Sim")
+        setId(id)
+
+    }
+
     const preencherCampos = (obj) => {
         setMarca(obj.marca)
         setId(obj.id)
@@ -81,7 +104,9 @@ function Marca() {
         !id ? create() : update()
     }
 
-
+    const removerAlert = () => {
+        setMessage(false)
+    }
     /**
      * Modal
      */
@@ -92,6 +117,7 @@ function Marca() {
     };
 
     const editItem = async (id) => {
+
         let obj = await buscarUm(id);
         preencherCampos(obj)
         setOpen(true);
@@ -101,9 +127,17 @@ function Marca() {
         setOpen(false);
     };
 
-
     return (
         <>
+            {
+                message === true ? <Alerta
+                    funcPri={() => removerAlert()}
+                    funcSec={() => remover(id)}
+                    textPri={textPri}
+                    textSec={textSec}
+                    alertMessage={alertMessage}
+                /> : ""
+            }
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">Registro</DialogTitle>
                 <DialogContent>
@@ -147,7 +181,7 @@ function Marca() {
                                 iconPrincipal={<EditarIcon />}
                                 iconSecundario={<RemoverIcon />}
                                 funcPri={() => editItem(i.id)}
-                                funcSec={() => remover(i.id)}
+                                funcSec={() => preDelete(i.id)}
                                 titulo={i.marca}
                                 subtitulo='Marcas'
                             />
