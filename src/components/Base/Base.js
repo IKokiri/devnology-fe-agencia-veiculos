@@ -18,10 +18,17 @@ import ListItemText from '@material-ui/core/ListItemText';
 import MarcaIcon from '@material-ui/icons/BrandingWatermark';
 import ModeloIcon from '@material-ui/icons/Commute';
 import ClienteIcon from '@material-ui/icons/FaceOutlined';
+import FuncionarioIcon from '@material-ui/icons/EmojiPeopleOutlined';
+import VeiculoIcon from '@material-ui/icons/DriveEtaOutlined';
+import ProdutoIcon from '@material-ui/icons/AttachMoney';
 
 import Marca from '../../pages/Marca/Marca'
 import Modelo from '../../pages/Modelo/Modelo'
 import Cliente from '../../pages/Cliente/Cliente'
+import Funcionario from '../../pages/Funcionario/Funcionario'
+import Veiculo from '../../pages/Veiculo/Veiculo'
+import Produto from '../../pages/Produto/Produto'
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -166,6 +173,19 @@ export default function Nav() {
               <ListItemIcon><ClienteIcon /></ListItemIcon>
               <ListItemText primary="Cliente" />
             </ListItem>
+            <ListItem button component={Link} to="/funcionario">
+              <ListItemIcon><FuncionarioIcon /></ListItemIcon>
+              <ListItemText primary="Funcionario" />
+            </ListItem>
+            <ListItem button component={Link} to="/veiculo">
+              <ListItemIcon><VeiculoIcon /></ListItemIcon>
+              <ListItemText primary="Veiculo" />
+            </ListItem>
+            <ListItem button component={Link} to="/produto">
+              <ListItemIcon><ProdutoIcon /></ListItemIcon>
+              <ListItemText primary="Produto" />
+            </ListItem>
+
           </List>
         </Drawer>
 
@@ -180,6 +200,15 @@ export default function Nav() {
             </Route>
             <Route path="/cliente">
               <Cliente />
+            </Route>
+            <Route path="/funcionario">
+              <Funcionario />
+            </Route>
+            <Route path="/veiculo">
+              <Veiculo />
+            </Route>
+            <Route path="/produto">
+              <Produto />
             </Route>
           </Switch>
         </main>

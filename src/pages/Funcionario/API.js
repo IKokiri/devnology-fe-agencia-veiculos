@@ -1,6 +1,6 @@
 import { Server } from '../../Server'
 
-const recurso = 'cliente'
+const recurso = 'funcionario'
 const base = Server.getServer()
 const rota = base + recurso
 

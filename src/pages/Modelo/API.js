@@ -1,5 +1,7 @@
+import { Server } from '../../Server'
 const recurso = 'modelo'
-const base = `http://localhost:4000/agencia/v1/`
+
+const base = Server.getServer()
 const rota = base + recurso
 
 export class API {
