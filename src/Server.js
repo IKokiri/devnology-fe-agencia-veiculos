@@ -7,7 +7,7 @@ export class Server {
 
         } else {
 
-            return `http://agencia-veiculos-be.herokuapp.com/agencia/v1/`
+            return `https://agencia-veiculos-be.herokuapp.com/agencia/v1/`
         }
     }
 
