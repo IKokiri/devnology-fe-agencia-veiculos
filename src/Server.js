@@ -1,7 +1,7 @@
 export class Server {
 
     static getServer() {
-        if (process.env.NODE_ENV === 'devlopment') {
+        if (process.env.NODE_ENV === 'development') {
 
             return `http://localhost:4000/agencia/v1/`
 
