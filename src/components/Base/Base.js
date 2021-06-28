@@ -21,6 +21,17 @@ import ClienteIcon from '@material-ui/icons/FaceOutlined';
 import FuncionarioIcon from '@material-ui/icons/EmojiPeopleOutlined';
 import VeiculoIcon from '@material-ui/icons/DriveEtaOutlined';
 import ProdutoIcon from '@material-ui/icons/AttachMoney';
+import VendaIcon from '@material-ui/icons/ArrowRightAltOutlined';
+import CompraIcon from '@material-ui/icons/KeyboardBackspaceOutlined';
+
+import DisponivelIcon from '@material-ui/icons/DriveEta';
+import HVendaIcon from '@material-ui/icons/ArrowForward';
+import HCompraIcon from '@material-ui/icons/ArrowBack';
+import TCompraIcon from '@material-ui/icons/CallReceived';
+import TVendaIcon from '@material-ui/icons/CallMade';
+import FluxoIcon from '@material-ui/icons/CompareArrows';
+import ComissaoIcon from '@material-ui/icons/EmojiEmotions';
+
 
 import Marca from '../../pages/Marca/Marca'
 import Modelo from '../../pages/Modelo/Modelo'
@@ -28,6 +39,8 @@ import Cliente from '../../pages/Cliente/Cliente'
 import Funcionario from '../../pages/Funcionario/Funcionario'
 import Veiculo from '../../pages/Veiculo/Veiculo'
 import Produto from '../../pages/Produto/Produto'
+import Comprar from '../../pages/Comprar/Comprar'
+import Vender from '../../pages/Vender/Vender'
 
 import {
   BrowserRouter as Router,
@@ -185,7 +198,57 @@ export default function Nav() {
               <ListItemIcon><ProdutoIcon /></ListItemIcon>
               <ListItemText primary="Produto" />
             </ListItem>
-
+            <ListItem button component={Link} to="/comprar">
+              <ListItemIcon><CompraIcon /></ListItemIcon>
+              <ListItemText primary="Comprar" />
+            </ListItem>
+            <ListItem button component={Link} to="/vender">
+              <ListItemIcon><VendaIcon /></ListItemIcon>
+              <ListItemText primary="Vender" />
+            </ListItem>
+          </List>
+          <Divider />
+          <List>
+            <ListItem button component={Link} to="/vender">
+              <ListItemIcon><DisponivelIcon /></ListItemIcon>
+              <ListItemText primary="Disponíveis" />
+            </ListItem>
+          </List>
+          <List>
+            <ListItem button component={Link} to="/vender">
+              <ListItemIcon><HVendaIcon /></ListItemIcon>
+              <ListItemText primary="Histórico Venda" />
+            </ListItem>
+          </List>
+          <List>
+            <ListItem button component={Link} to="/vender">
+              <ListItemIcon><HCompraIcon /></ListItemIcon>
+              <ListItemText primary="Histórico Compras" />
+            </ListItem>
+          </List>
+          <List>
+            <ListItem button component={Link} to="/vender">
+              <ListItemIcon><TCompraIcon /></ListItemIcon>
+              <ListItemText primary="Total Compras" />
+            </ListItem>
+          </List>
+          <List>
+            <ListItem button component={Link} to="/vender">
+              <ListItemIcon><TVendaIcon /></ListItemIcon>
+              <ListItemText primary="Total Vendas" />
+            </ListItem>
+          </List>
+          <List>
+            <ListItem button component={Link} to="/vender">
+              <ListItemIcon><FluxoIcon /></ListItemIcon>
+              <ListItemText primary="Fluxo" />
+            </ListItem>
+          </List>
+          <List>
+            <ListItem button component={Link} to="/vender">
+              <ListItemIcon><ComissaoIcon /></ListItemIcon>
+              <ListItemText primary="Comissões" />
+            </ListItem>
           </List>
         </Drawer>
 
@@ -209,6 +272,12 @@ export default function Nav() {
             </Route>
             <Route path="/produto">
               <Produto />
+            </Route>
+            <Route path="/comprar">
+              <Comprar />
+            </Route>
+            <Route path="/vender">
+              <Vender />
             </Route>
           </Switch>
         </main>

@@ -35,6 +35,34 @@ export class APIGlobal {
         }
     }
 
+    static async getProdutos() {
+        try {
+            const response = await fetch(`${base}produto`);
+            const responseJson = await response.json();
+            return responseJson;
+        } catch (e) {
+            throw e;
+        }
+    }
 
+    static async getEstoque() {
+        try {
+            const response = await fetch(`${base}estoque`);
+            const responseJson = await response.json();
+            return responseJson;
+        } catch (e) {
+            throw e;
+        }
+    }
+    
+    static async getFuncionarios() {
+        try {
+            const response = await fetch(`${base}funcionario`);
+            const responseJson = await response.json();
+            return responseJson;
+        } catch (e) {
+            throw e;
+        }
+    }
 
 }
