@@ -32,7 +32,6 @@ import TVendaIcon from '@material-ui/icons/CallMade';
 import FluxoIcon from '@material-ui/icons/CompareArrows';
 import ComissaoIcon from '@material-ui/icons/EmojiEmotions';
 
-
 import Marca from '../../pages/Marca/Marca'
 import Modelo from '../../pages/Modelo/Modelo'
 import Cliente from '../../pages/Cliente/Cliente'
@@ -41,6 +40,8 @@ import Veiculo from '../../pages/Veiculo/Veiculo'
 import Produto from '../../pages/Produto/Produto'
 import Comprar from '../../pages/Comprar/Comprar'
 import Vender from '../../pages/Vender/Vender'
+import Disponivel from '../../pages/Estoque/Estoque'
+import HVenda from '../../pages/HVenda/HVenda'
 
 import {
   BrowserRouter as Router,
@@ -209,13 +210,13 @@ export default function Nav() {
           </List>
           <Divider />
           <List>
-            <ListItem button component={Link} to="/vender">
+            <ListItem button component={Link} to="/disponivel">
               <ListItemIcon><DisponivelIcon /></ListItemIcon>
               <ListItemText primary="Disponíveis" />
             </ListItem>
           </List>
           <List>
-            <ListItem button component={Link} to="/vender">
+            <ListItem button component={Link} to="/historicovenda">
               <ListItemIcon><HVendaIcon /></ListItemIcon>
               <ListItemText primary="Histórico Venda" />
             </ListItem>
@@ -278,6 +279,12 @@ export default function Nav() {
             </Route>
             <Route path="/vender">
               <Vender />
+            </Route>
+            <Route path="/disponivel">
+              <Disponivel />
+            </Route>
+            <Route path="/historicovenda">
+              <HVenda />
             </Route>
           </Switch>
         </main>
