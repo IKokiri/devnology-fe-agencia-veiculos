@@ -10,13 +10,16 @@ function HCompra() {
     const [items, setItems] = useState([]);
     const [copyItems, setCopyItems] = useState([]);
     const [totalCompras, setTotalCompras] = useState(0);
-    
+
     var total = 0;
 
     useEffect(() => {
         buscarTodos();
     }, []);
 
+    useEffect(() => {
+        somarCompras();
+    });
     const somarCompras = () => {
         let total = 0
         for (var i in items) {
@@ -30,7 +33,6 @@ function HCompra() {
         const results = await API.get();
         setItems(results)
         setCopyItems(results)
-
 
     };
 

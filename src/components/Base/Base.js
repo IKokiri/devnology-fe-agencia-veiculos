@@ -27,8 +27,6 @@ import CompraIcon from '@material-ui/icons/KeyboardBackspaceOutlined';
 import DisponivelIcon from '@material-ui/icons/DriveEta';
 import HVendaIcon from '@material-ui/icons/ArrowForward';
 import HCompraIcon from '@material-ui/icons/ArrowBack';
-import TCompraIcon from '@material-ui/icons/CallReceived';
-import TVendaIcon from '@material-ui/icons/CallMade';
 import FluxoIcon from '@material-ui/icons/CompareArrows';
 import ComissaoIcon from '@material-ui/icons/EmojiEmotions';
 
@@ -43,6 +41,7 @@ import Vender from '../../pages/Vender/Vender'
 import Disponivel from '../../pages/Estoque/Estoque'
 import HVenda from '../../pages/HVenda/HVenda'
 import HCompra from '../../pages/HCompra/HCompra'
+import Fluxo from '../../pages/Fluxo/Fluxo'
 
 import {
   BrowserRouter as Router,
@@ -229,19 +228,7 @@ export default function Nav() {
             </ListItem>
           </List>
           <List>
-            <ListItem button component={Link} to="/vender">
-              <ListItemIcon><TCompraIcon /></ListItemIcon>
-              <ListItemText primary="Total Compras" />
-            </ListItem>
-          </List>
-          <List>
-            <ListItem button component={Link} to="/vender">
-              <ListItemIcon><TVendaIcon /></ListItemIcon>
-              <ListItemText primary="Total Vendas" />
-            </ListItem>
-          </List>
-          <List>
-            <ListItem button component={Link} to="/vender">
+            <ListItem button component={Link} to="/fluxo">
               <ListItemIcon><FluxoIcon /></ListItemIcon>
               <ListItemText primary="Fluxo" />
             </ListItem>
@@ -289,6 +276,9 @@ export default function Nav() {
             </Route>
             <Route path="/historicocompra">
               <HCompra />
+            </Route>
+            <Route path="/fluxo">
+              <Fluxo />
             </Route>
           </Switch>
         </main>

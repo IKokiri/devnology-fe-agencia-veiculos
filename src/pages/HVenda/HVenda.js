@@ -10,13 +10,17 @@ function HVenda() {
     const [items, setItems] = useState([]);
     const [copyItems, setCopyItems] = useState([]);
     const [totalVendas, setTotalVendas] = useState(0);
-    
+
     var total = 0;
 
     useEffect(() => {
         buscarTodos();
     }, []);
 
+
+    useEffect(() => {
+        somarVendas();
+    });
     const somarVendas = () => {
         let total = 0
         for (var i in items) {
