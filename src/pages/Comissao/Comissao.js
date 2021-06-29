@@ -8,7 +8,7 @@ function Comissao() {
 
     const [items, setItems] = useState([]);
     const [copyItems, setCopyItems] = useState([]);
-
+    const [totalComissoes, setTotalComissoes] = useState(0);
 
     useEffect(() => {
         buscarTodos();
@@ -20,6 +20,17 @@ function Comissao() {
         setCopyItems(results)
     };
 
+    useEffect(() => {
+        somarComissoes();
+    });
+    const somarComissoes = () => {
+        let total = 0
+        for (var i in items) {
+            total += items[i].comissao
+        }
+
+        setTotalComissoes(total)
+    }
 
     return (
         <>
@@ -50,6 +61,11 @@ function Comissao() {
                     }
                 </Grid>
 
+                <Grid item xs={12} sm={6} md={6} lg={4}>
+                    {
+                        <h1>Total em comissões: {totalComissoes}</h1>
+                    }
+                </Grid>
             </Grid>
             <Grid container spacing={4}>
                 {
