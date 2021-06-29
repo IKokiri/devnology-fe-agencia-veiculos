@@ -42,6 +42,7 @@ import Comprar from '../../pages/Comprar/Comprar'
 import Vender from '../../pages/Vender/Vender'
 import Disponivel from '../../pages/Estoque/Estoque'
 import HVenda from '../../pages/HVenda/HVenda'
+import HCompra from '../../pages/HCompra/HCompra'
 
 import {
   BrowserRouter as Router,
@@ -222,7 +223,7 @@ export default function Nav() {
             </ListItem>
           </List>
           <List>
-            <ListItem button component={Link} to="/vender">
+            <ListItem button component={Link} to="/historicocompra">
               <ListItemIcon><HCompraIcon /></ListItemIcon>
               <ListItemText primary="Histórico Compras" />
             </ListItem>
@@ -285,6 +286,9 @@ export default function Nav() {
             </Route>
             <Route path="/historicovenda">
               <HVenda />
+            </Route>
+            <Route path="/historicocompra">
+              <HCompra />
             </Route>
           </Switch>
         </main>
