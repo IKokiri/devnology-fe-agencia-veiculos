@@ -42,6 +42,7 @@ import Disponivel from '../../pages/Estoque/Estoque'
 import HVenda from '../../pages/HVenda/HVenda'
 import HCompra from '../../pages/HCompra/HCompra'
 import Fluxo from '../../pages/Fluxo/Fluxo'
+import Comissao from '../../pages/Comissao/Comissao'
 
 import {
   BrowserRouter as Router,
@@ -234,7 +235,7 @@ export default function Nav() {
             </ListItem>
           </List>
           <List>
-            <ListItem button component={Link} to="/vender">
+            <ListItem button component={Link} to="/comissao">
               <ListItemIcon><ComissaoIcon /></ListItemIcon>
               <ListItemText primary="Comissões" />
             </ListItem>
@@ -279,6 +280,9 @@ export default function Nav() {
             </Route>
             <Route path="/fluxo">
               <Fluxo />
+            </Route>
+            <Route path="/comissao">
+              <Comissao />
             </Route>
           </Switch>
         </main>
