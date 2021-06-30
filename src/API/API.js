@@ -1,4 +1,5 @@
 import { Server } from '../Server'
+import { Cache } from './Cache.js'
 
 const base = Server.getServer()
 

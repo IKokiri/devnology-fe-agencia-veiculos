@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Cartao from '../../components/Cartao/Cartao'
 import { API } from './API'
 import { APIGlobal } from '../../API/API'
+import { Cache } from '../../API/Cache'
 import EditarIcon from '@material-ui/icons/CreateOutlined';
 import RemoverIcon from '@material-ui/icons/DeleteOutlined';
 import Grid from '@material-ui/core/Grid';
@@ -38,6 +39,7 @@ function Veiculo() {
     const [copyItems, setCopyItems] = useState([]);
 
     const [marcas, setMarcas] = useState([]);
+    const [cachemarcas, setCacheMarcas] = useState([]);
     const [modelos, setModelos] = useState([]);
 
     const [id, setId] = useState('');
@@ -47,6 +49,7 @@ function Veiculo() {
     const [placa, setPlaca] = useState('');
     const [cor, setCor] = useState('');
     const [chassi, setChassi] = useState('');
+
     /**
      * Alert
      */
@@ -70,10 +73,13 @@ function Veiculo() {
     const buscarMarcas = async () => {
         const results = await APIGlobal.getMarcas();
         setMarcas(results)
+        Cache.setCache("marcas",results)
     };
     const buscarModelos = async () => {
         const results = await APIGlobal.getModelos();
         setModelos(results)
+        
+        Cache.setCache("modelos",results)
     };
 
     const remover = (id) => {
@@ -96,7 +102,7 @@ function Veiculo() {
             "chassi": chassi
         }
 
-        let result = await API.create(obj)
+        await API.create(obj)
 
         buscarTodos()
         limparCampos()
@@ -124,7 +130,7 @@ function Veiculo() {
             "chassi": chassi,
         }
 
-        let result = await API.update(obj)
+        await API.update(obj)
 
         setMessage(true)
 
@@ -263,7 +269,7 @@ function Veiculo() {
                         >
                             {
                                 marcas.map((m) => {
-                                    return <MenuItem value={m.id}>{m.marca}</MenuItem >
+                                    return <MenuItem key={m.id} value={m.id}>{m.marca}</MenuItem >
                                 })
                             }
                         </Select>
@@ -364,7 +370,8 @@ function Veiculo() {
                                 funcPri={() => editItem(i.id)}
                                 funcSec={() => preDelete(i.id)}
                                 titulo={i.placa}
-                                subtitulo='Veiculos'
+                                subtitulo={JSON.parse(localStorage.getItem("marcas"))[i.id_marca].marca+" - "+
+                                JSON.parse(localStorage.getItem("modelos"))[i.id_modelo].modelo+" / "+i.ano_fabricacao}
                             />
                         </Grid>
                     })
