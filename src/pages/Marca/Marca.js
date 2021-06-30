@@ -12,6 +12,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Alerta from '../../components/Alerta/Alerta'
+import { Validacao } from '../../Validacao/Validacao'
 
 function Marca() {
 
@@ -49,23 +50,31 @@ function Marca() {
     };
 
     const create = async () => {
+
+        let valid = Validacao.obrigatorio(marca)
+        if (!valid) {
+            alert("Preencha todos os campos")
+            return false
+        }
+
         const obj = {
             "marca": marca
         }
 
-        let result = await API.create(obj)
+        await API.create(obj)
+        positivo('Criado com sucesso!')
 
+    };
+
+
+    const positivo = (msg) => {
         buscarTodos()
         limparCampos()
-
         setMessage(true)
-
-        setAlertMessage('Criado com sucesso!')
+        setAlertMessage(msg)
         setTextPri('Fechar')
-
-
         setOpen(false);
-    };
+    }
 
     const update = async () => {
 
@@ -75,15 +84,11 @@ function Marca() {
             "id": id,
             "marca": marca
         }
-        let result = await API.update(obj)
 
-        setMessage(true)
+        await API.update(obj)
 
-        setAlertMessage('Alterado com sucesso')
-        setTextPri('Fechar')
-
-        buscarTodos()
-        setOpen(false);
+        positivo('Alterado com sucesso')
+       
     };
 
     const buscarUm = async (id) => {
