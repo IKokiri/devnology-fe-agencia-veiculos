@@ -285,7 +285,7 @@ function Veiculo() {
                         >
                             {
                                 modelos.map((m) => {
-                                    return <MenuItem value={m.id}>{m.modelo}</MenuItem >
+                                    return <MenuItem key={m.id} value={m.id}>{m.modelo}</MenuItem >
                                 })
                             }
                         </Select>
