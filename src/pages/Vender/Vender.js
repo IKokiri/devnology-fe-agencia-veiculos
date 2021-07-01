@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Cartao from '../../components/Cartao/Cartao'
 import { API } from './API'
+import { Cache } from '../../API/Cache'
 import { APIGlobal } from '../../API/API'
 import EditarIcon from '@material-ui/icons/CreateOutlined';
 import RemoverIcon from '@material-ui/icons/DeleteOutlined';
@@ -57,12 +58,37 @@ function Vender() {
         buscarTodos();
         buscarEstoque()
         buscarFuncionarios()
+        buscarProdutos()
+        buscarModelos()
+        buscarVeiculos()
+        buscarComissoes()
     }, []);
 
     const buscarTodos = async () => {
         const results = await API.get();
         setItems(results)
         setCopyItems(results)
+    };
+
+    const buscarProdutos = async () => {
+        const results = await APIGlobal.getProdutos();
+        Cache.setCache("produtos", results)
+
+    };
+
+    const buscarModelos = async () => {
+        const results = await APIGlobal.getModelos();
+        Cache.setCache("modelos", results)
+    };
+
+
+    const buscarVeiculos = async () => {
+        const results = await APIGlobal.getComissoes();
+        Cache.setCache("comissoes", results)
+    };
+    const buscarComissoes = async () => {
+        const results = await APIGlobal.getVeiculos();
+        Cache.setCache("veiculos", results)
     };
 
     const buscarEstoque = async () => {
@@ -73,6 +99,8 @@ function Vender() {
     const buscarFuncionarios = async () => {
         const results = await APIGlobal.getFuncionarios();
         setFuncionarios(results)
+        Cache.setCache("funcionarios", results)
+
     };
 
     const remover = (id) => {
@@ -323,7 +351,15 @@ function Vender() {
                     />
                 </Grid>
                 {
-                    items.map((i) => {
+                    items.map((i) => {        
+                    
+                    let produtos = JSON.parse(localStorage.getItem("produtos"))
+                    let veiculos = JSON.parse(localStorage.getItem("veiculos"))
+                    let modelos = JSON.parse(localStorage.getItem("modelos"))
+                    let funcionarios = JSON.parse(localStorage.getItem("funcionarios"))
+                    let id_produto = JSON.parse(localStorage.getItem("produtos"))[i.id_produto].id
+                    let id_veiculo = JSON.parse(localStorage.getItem("produtos"))[i.id_produto].id_veiculo
+
                         return <Grid key={i.id} item xs={12} sm={6} md={6} lg={4}>
                             <Cartao
                                 key={i.id}
@@ -331,8 +367,8 @@ function Vender() {
                                 iconSecundario={<RemoverIcon />}
                                 funcPri={() => editItem(i.id)}
                                 funcSec={() => preDelete(i.id)}
-                                titulo={i.id_produto + " - " + i.data_venda}
-                                subtitulo={'R$' + i.valor}
+                                titulo={veiculos[id_veiculo].placa + " - " + i.data_venda}
+                                subtitulo={modelos[veiculos[id_veiculo].id_modelo].modelo + " - " + veiculos[id_veiculo].cor + ' - R$' + i.valor}
                             />
                         </Grid>
                     })

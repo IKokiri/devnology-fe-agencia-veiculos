@@ -86,4 +86,13 @@ export class APIGlobal {
         }
     }
 
+    static async getComissoes() {
+        try {
+            const response = await fetch(`${base}comissao`);
+            const responseJson = await response.json();
+            return responseJson;
+        } catch (e) {
+            throw e;
+        }
+    }
 }
