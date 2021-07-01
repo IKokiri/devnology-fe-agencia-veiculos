@@ -52,12 +52,12 @@ function Produto() {
     const [textSec, setTextSec] = useState('');
 
     useEffect(() => {
-        buscarTodos();
-        buscarVeiculos()
         /**
          * cache
          */
         buscarModelos()
+        buscarVeiculos()
+        buscarTodos();
     }, []);
 
     const buscarTodos = async () => {

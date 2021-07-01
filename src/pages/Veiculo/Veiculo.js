@@ -59,9 +59,9 @@ function Veiculo() {
     const [textSec, setTextSec] = useState('');
 
     useEffect(() => {
-        buscarTodos();
         buscarMarcas()
         buscarModelos()
+        buscarTodos();
     }, []);
 
     const buscarTodos = async () => {

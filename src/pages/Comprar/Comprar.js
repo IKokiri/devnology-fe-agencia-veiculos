@@ -53,13 +53,13 @@ function Comprar() {
     const [textSec, setTextSec] = useState('');
 
     useEffect(() => {
-        buscarTodos();
         buscarProdutos()
         /**
          * cache
          */
         buscarModelos()
         buscarVeiculos()
+        buscarTodos();
     }, []);
 
     const buscarTodos = async () => {

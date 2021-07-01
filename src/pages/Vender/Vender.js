@@ -55,13 +55,14 @@ function Vender() {
     const [textSec, setTextSec] = useState('');
 
     useEffect(() => {
-        buscarTodos();
         buscarEstoque()
         buscarFuncionarios()
         buscarProdutos()
         buscarModelos()
         buscarVeiculos()
         buscarComissoes()
+        buscarTodos();
+
     }, []);
 
     const buscarTodos = async () => {
@@ -351,14 +352,11 @@ function Vender() {
                     />
                 </Grid>
                 {
-                    items.map((i) => {        
-                    
-                    let produtos = JSON.parse(localStorage.getItem("produtos"))
-                    let veiculos = JSON.parse(localStorage.getItem("veiculos"))
-                    let modelos = JSON.parse(localStorage.getItem("modelos"))
-                    let funcionarios = JSON.parse(localStorage.getItem("funcionarios"))
-                    let id_produto = JSON.parse(localStorage.getItem("produtos"))[i.id_produto].id
-                    let id_veiculo = JSON.parse(localStorage.getItem("produtos"))[i.id_produto].id_veiculo
+                    items.map((i) => {
+
+                        let veiculos = JSON.parse(localStorage.getItem("veiculos"))
+                        let modelos = JSON.parse(localStorage.getItem("modelos"))
+                        let id_veiculo = JSON.parse(localStorage.getItem("produtos"))[i.id_produto].id_veiculo
 
                         return <Grid key={i.id} item xs={12} sm={6} md={6} lg={4}>
                             <Cartao
