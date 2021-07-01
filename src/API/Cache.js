@@ -7,7 +7,7 @@ export class Cache {
             datas[json[j].id] = (json[j])
         }
         localStorage.setItem(local, JSON.stringify(datas))
-    
+
     }
 
 

@@ -16,6 +16,7 @@ import Alerta from '../../components/Alerta/Alerta'
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
+import { Cache } from '../../API/Cache'
 import { makeStyles } from '@material-ui/core/styles';
 
 import FormControl from '@material-ui/core/FormControl';
@@ -53,6 +54,11 @@ function Produto() {
     useEffect(() => {
         buscarTodos();
         buscarVeiculos()
+        /**
+         * cache
+         */
+        buscarMarcas()
+        buscarModelos()
     }, []);
 
     const buscarTodos = async () => {
@@ -64,8 +70,17 @@ function Produto() {
     const buscarVeiculos = async () => {
         const results = await APIGlobal.getVeiculos();
         setVeiculos(results)
-    };
+        Cache.setCache("veiculos", results)
 
+    };
+    const buscarMarcas = async () => {
+        const results = await APIGlobal.getMarcas();
+        Cache.setCache("marcas", results)
+    };
+    const buscarModelos = async () => {
+        const results = await APIGlobal.getModelos();
+        Cache.setCache("modelos", results)
+    };
     const remover = (id) => {
         deletar(id)
         limparCampos()
@@ -278,6 +293,8 @@ function Produto() {
                 </Grid>
                 {
                     items.map((i) => {
+                        let veiculo = JSON.parse(localStorage.getItem("veiculos"))
+                        let modelos = JSON.parse(localStorage.getItem("modelos"))
                         return <Grid key={i.id} item xs={12} sm={6} md={6} lg={4}>
                             <Cartao
                                 key={i.id}
@@ -285,7 +302,11 @@ function Produto() {
                                 iconSecundario={<RemoverIcon />}
                                 funcPri={() => editItem(i.id)}
                                 funcSec={() => preDelete(i.id)}
-                                titulo={'Produto: ' + i.id_veiculo}
+                                titulo={
+                                    veiculo[i.id_veiculo].placa + " - " +
+                                    modelos[veiculo[i.id_veiculo].id_modelo].modelo + " - " +
+                                    veiculo[i.id_veiculo].cor
+                            }
                                 subtitulo={'Valor FIPE: R$' + i.valor}
                             />
                         </Grid>
