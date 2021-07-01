@@ -57,7 +57,6 @@ function Produto() {
         /**
          * cache
          */
-        buscarMarcas()
         buscarModelos()
     }, []);
 
@@ -72,10 +71,6 @@ function Produto() {
         setVeiculos(results)
         Cache.setCache("veiculos", results)
 
-    };
-    const buscarMarcas = async () => {
-        const results = await APIGlobal.getMarcas();
-        Cache.setCache("marcas", results)
     };
     const buscarModelos = async () => {
         const results = await APIGlobal.getModelos();

@@ -4,6 +4,7 @@ import { API } from './API'
 import { APIGlobal } from '../../API/API'
 import EditarIcon from '@material-ui/icons/CreateOutlined';
 import RemoverIcon from '@material-ui/icons/DeleteOutlined';
+import { Cache } from '../../API/Cache'
 import Grid from '@material-ui/core/Grid';
 import AddIcon from '@material-ui/icons/AddOutlined';
 import Dialog from '@material-ui/core/Dialog';
@@ -54,6 +55,11 @@ function Comprar() {
     useEffect(() => {
         buscarTodos();
         buscarProdutos()
+        /**
+         * cache
+         */
+        buscarModelos()
+        buscarVeiculos()
     }, []);
 
     const buscarTodos = async () => {
@@ -65,6 +71,19 @@ function Comprar() {
     const buscarProdutos = async () => {
         const results = await APIGlobal.getProdutos();
         setProdutos(results)
+        Cache.setCache("produtos", results)
+
+    };
+
+    const buscarModelos = async () => {
+        const results = await APIGlobal.getModelos();
+        Cache.setCache("modelos", results)
+    };
+
+
+    const buscarVeiculos = async () => {
+        const results = await APIGlobal.getVeiculos();
+        Cache.setCache("veiculos", results)
     };
 
     const remover = (id) => {
@@ -93,7 +112,6 @@ function Comprar() {
 
         setAlertMessage('Criado com sucesso!')
         setTextPri('Fechar')
-
 
         setOpen(false);
     };
@@ -293,7 +311,14 @@ function Comprar() {
                     />
                 </Grid>
                 {
+
                     items.map((i) => {
+                        let produtos = JSON.parse(localStorage.getItem("produtos"))
+                        let veiculos = JSON.parse(localStorage.getItem("veiculos"))
+                        let modelos = JSON.parse(localStorage.getItem("modelos"))
+                        let id_produto = JSON.parse(localStorage.getItem("produtos"))[i.id_produto].id
+                        let id_veiculo = JSON.parse(localStorage.getItem("produtos"))[i.id_produto].id_veiculo
+
                         return <Grid key={i.id} item xs={12} sm={6} md={6} lg={4}>
                             <Cartao
                                 key={i.id}
@@ -301,8 +326,8 @@ function Comprar() {
                                 iconSecundario={<RemoverIcon />}
                                 funcPri={() => editItem(i.id)}
                                 funcSec={() => preDelete(i.id)}
-                                titulo={i.id_produto+" - "+i.data_compra}
-                                subtitulo={'R$' + i.valor}
+                                titulo={veiculos[id_veiculo].placa + " - " + i.data_compra}
+                                subtitulo={modelos[veiculos[id_veiculo].id_modelo].modelo + " - " + veiculos[id_veiculo].cor + ' - R$' + i.valor}
                             />
                         </Grid>
                     })
