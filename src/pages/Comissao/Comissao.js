@@ -14,6 +14,10 @@ function Comissao() {
 
     useEffect(() => {
         buscarFuncionarios()
+        buscarProdutos()
+        buscarModelos()
+        buscarVeiculos()
+        buscarVendas()
         buscarTodos();
     }, []);
 
@@ -22,10 +26,30 @@ function Comissao() {
         setItems(results)
         setCopyItems(results)
     };
+    const buscarProdutos = async () => {
+        const results = await APIGlobal.getProdutos();
+        Cache.setCache("produtos", results)
 
+    };
+
+    const buscarModelos = async () => {
+        const results = await APIGlobal.getModelos();
+        Cache.setCache("modelos", results)
+    };
+
+
+    const buscarVeiculos = async () => {
+        const results = await APIGlobal.getVeiculos();
+        Cache.setCache("veiculos", results)
+    };
     const buscarFuncionarios = async () => {
         const results = await APIGlobal.getFuncionarios()
         Cache.setCache("funcionarios", results)
+
+    };
+    const buscarVendas = async () => {
+        const results = await APIGlobal.getVendas()
+        Cache.setCache("vendas", results)
 
     };
 
@@ -78,15 +102,18 @@ function Comissao() {
             </Grid>
             <Grid container spacing={4}>
                 {
-
                     items.map((i) => {
+                        let id_produto = JSON.parse(localStorage.getItem("vendas"))[i.id_venda].id_produto
+                        let id_veiculo = JSON.parse(localStorage.getItem("produtos"))[id_produto].id_veiculo
+                        let veiculos = JSON.parse(localStorage.getItem("veiculos"))
+                        
                         let funcionarios = JSON.parse(localStorage.getItem("funcionarios"))
 
                         return <Grid key={i.id} item xs={12} sm={6} md={6} lg={4}>
                             <Cartao
                                 key={i.id}
                                 titulo={funcionarios[i.id_funcionario].nome}
-                                subtitulo={i.id_venda + " - " + i.comissao}
+                                subtitulo={veiculos[id_veiculo].placa + " - " + i.comissao}
                             />
                         </Grid>
                     })
