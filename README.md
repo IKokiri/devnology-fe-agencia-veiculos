@@ -31,10 +31,15 @@
 ## Buscas
 
 - https://pt-br.reactjs.org/
+- https://material-ui.com/
 
 ## Como rodar essa aplicação
 
+```powershell
+npm start
+```
 ## Como fazer o deploy da aplicação
+- Ao fazer o commit do codigo, a aplicação vai para o gitub e o Heroku faz o depoloy automático da aplicação.
 
 ## Requisitos do cliente
 - Cadastrar a compra de um veículo, modelo, marca, ano de fabricação, placa, cor, chassi, data da
