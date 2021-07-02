@@ -281,8 +281,14 @@ function Vender() {
                             }
                         >
                             {
+
                                 estoque.map((m) => {
-                                    return <MenuItem value={m.id_produto}>{m.id_produto}</MenuItem >
+
+                                    let veiculos = JSON.parse(localStorage.getItem("veiculos"))
+                                    let modelos = JSON.parse(localStorage.getItem("modelos"))
+                                    let id_veiculo = JSON.parse(localStorage.getItem("produtos"))[m.id_produto].id_veiculo
+                                    
+                                    return <MenuItem value={m.id_produto}>{modelos[veiculos[id_veiculo].id_modelo].modelo}</MenuItem >
                                 })
                             }
                         </Select>

@@ -3,6 +3,8 @@ import Cartao from '../../components/Cartao/Cartao'
 import { API } from './API'
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
+import { APIGlobal } from '../../API/API'
+import { Cache } from '../../API/Cache'
 
 function HVenda() {
 
@@ -14,6 +16,9 @@ function HVenda() {
     var total = 0;
 
     useEffect(() => {
+        buscarProdutos()
+        buscarModelos()
+        buscarVeiculos()
         buscarTodos();
     }, []);
 
@@ -36,6 +41,22 @@ function HVenda() {
         setCopyItems(results)
 
 
+    };
+    const buscarProdutos = async () => {
+        const results = await APIGlobal.getProdutos();
+        Cache.setCache("produtos", results)
+
+    };
+
+    const buscarModelos = async () => {
+        const results = await APIGlobal.getModelos();
+        Cache.setCache("modelos", results)
+    };
+
+
+    const buscarVeiculos = async () => {
+        const results = await APIGlobal.getVeiculos();
+        Cache.setCache("veiculos", results)
     };
 
     return (
@@ -82,10 +103,14 @@ function HVenda() {
             <Grid container spacing={4}>
                 {
                     items.map((i) => {
+                        let veiculos = JSON.parse(localStorage.getItem("veiculos"))
+                        let modelos = JSON.parse(localStorage.getItem("modelos"))
+                        let id_veiculo = JSON.parse(localStorage.getItem("produtos"))[i.id_produto].id_veiculo
+                        let id_modelo = veiculos[id_veiculo].id_modelo
                         return (<Grid key={i.id} item xs={12} sm={6} md={6} lg={4}>
                             <Cartao
                                 key={i.id}
-                                titulo={i.id_produto + " - " + i.data_venda}
+                                titulo={modelos[id_modelo].modelo + " - " + veiculos[id_veiculo].placa + " - " + i.data_venda}
                                 subtitulo={'R$' + i.valor}
                             />
                         </Grid>)

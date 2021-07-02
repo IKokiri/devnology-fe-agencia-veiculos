@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import Cartao from '../../components/Cartao/Cartao'
 import { API } from './API'
 import { APIGlobal } from '../../API/API'
+import { Cache } from '../../API/Cache'
 import EditarIcon from '@material-ui/icons/CreateOutlined';
 import RemoverIcon from '@material-ui/icons/DeleteOutlined';
-import { Cache } from '../../API/Cache'
 import Grid from '@material-ui/core/Grid';
 import AddIcon from '@material-ui/icons/AddOutlined';
 import Dialog from '@material-ui/core/Dialog';
@@ -260,7 +260,9 @@ function Comprar() {
                         >
                             {
                                 produtos.map((m) => {
-                                    return <MenuItem value={m.id}>{m.id + " - " + m.valor}</MenuItem >
+                                    let veiculos = JSON.parse(localStorage.getItem("veiculos"))
+                                    let modelos = JSON.parse(localStorage.getItem("modelos"))
+                                    return <MenuItem key={m.id} value={m.id}>{veiculos[m.id_veiculo].placa + " - R$" + m.valor}</MenuItem >
                                 })
                             }
                         </Select>

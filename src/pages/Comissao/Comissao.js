@@ -3,6 +3,8 @@ import Cartao from '../../components/Cartao/Cartao'
 import { API } from './API'
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
+import { APIGlobal } from '../../API/API'
+import { Cache } from '../../API/Cache'
 
 function Comissao() {
 
@@ -11,6 +13,7 @@ function Comissao() {
     const [totalComissoes, setTotalComissoes] = useState(0);
 
     useEffect(() => {
+        buscarFuncionarios()
         buscarTodos();
     }, []);
 
@@ -18,6 +21,12 @@ function Comissao() {
         const results = await API.get();
         setItems(results)
         setCopyItems(results)
+    };
+
+    const buscarFuncionarios = async () => {
+        const results = await APIGlobal.getFuncionarios()
+        Cache.setCache("funcionarios", results)
+
     };
 
     useEffect(() => {
@@ -69,11 +78,14 @@ function Comissao() {
             </Grid>
             <Grid container spacing={4}>
                 {
+
                     items.map((i) => {
+                        let funcionarios = JSON.parse(localStorage.getItem("funcionarios"))
+
                         return <Grid key={i.id} item xs={12} sm={6} md={6} lg={4}>
                             <Cartao
                                 key={i.id}
-                                titulo={i.id_funcionario}
+                                titulo={funcionarios[i.id_funcionario].nome}
                                 subtitulo={i.id_venda + " - " + i.comissao}
                             />
                         </Grid>
