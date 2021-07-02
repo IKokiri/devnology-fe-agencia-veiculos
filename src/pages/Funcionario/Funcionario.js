@@ -165,7 +165,7 @@ function Funcionario() {
                         <TextField
                             autoFocus
                             margin="dense"
-                            label="BUSCAR"
+                            label="Buscar apenas nome, ex: luiz"
                             type="text"
                             fullWidth
                             onChange={

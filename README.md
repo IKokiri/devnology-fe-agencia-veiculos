@@ -27,7 +27,45 @@
 - Cliente
 - Estoque
 - Comissão
+## Operação Básica
 
+### cadastro de marca:
+    - Entrar com Texto e salvar
+
+### cadastro de modelo:
+    - Entrar com Texto e salvar
+
+### cadastro de funcionario:
+    - Entrar com nome : Texto
+    - Entrar com sobrenome : Texto
+    - Entrar com registro : Alfanumérico
+
+### cadastro de Veiculo:
+    - Depende do cadastro de Marca e Modelo
+
+### cadastro de Produto:
+    - Depende do cadastro de Veiculo
+
+### cadastro de Compra:
+    - Depende do cadastro de um produto
+
+### cadastro de Venda:
+    - Depende da compra de um produto
+
+### Disponibilidade
+    - São os veículos comprados e não vendidos
+
+### Historico venda
+    - Todos os veiculos vendidos
+    
+### Historico venda
+    - Todos os veiculos comprados
+
+### Historico fluxo
+    - Diferença entre os veículos vendidos / comprados
+    
+### Comissoes
+    - Valores pagos à funcionários de acordo com as vendas efetuadas
 ## Buscas
 
 - https://pt-br.reactjs.org/
@@ -55,4 +93,18 @@ sobre o lucro da venda).
 - Enviar o link do repositório no linkedin
 
 - Prazo 02/07/2021
+
+
+## Pendencias front-end
+    ### Desenvolver todos os testes unitário.
+    ### Usar uma ferramenta para trabalhar com cache de forma correta.
+    ### mensagens mais claras.
+    ### Formatar os valores
+    ### Formatar as datas
+    ### Melhorar os filtros 
+
+## Considerações no front-end
+    ### Não fiz uso de relacionamentos usando o sequelize. A ideia inicial era desacoplar ao maximo a estrutura para dessa forma, ao final do desenvolvimento separar alguns módulos e colocar em servidores direferentes (eu tenho a possibilidade de adicionar até 5 endpoints no meu Heroku).
+
+
 

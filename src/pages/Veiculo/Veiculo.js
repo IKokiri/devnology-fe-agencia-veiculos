@@ -218,7 +218,7 @@ function Veiculo() {
                         <TextField
                             autoFocus
                             margin="dense"
-                            label="BUSCAR"
+                            label="Buscar apenas placa, ex: HSJ-8383"
                             type="text"
                             fullWidth
                             onChange={

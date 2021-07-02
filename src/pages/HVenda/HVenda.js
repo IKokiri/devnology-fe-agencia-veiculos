@@ -67,7 +67,7 @@ function HVenda() {
                         <TextField
                             autoFocus
                             margin="dense"
-                            label="BUSCAR"
+                            label="Buscar apenas data, ex: 2021-12-30"
                             type="text"
                             fullWidth
                             onChange={

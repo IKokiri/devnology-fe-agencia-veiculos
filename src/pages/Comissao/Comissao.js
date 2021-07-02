@@ -73,7 +73,7 @@ function Comissao() {
                         <TextField
                             autoFocus
                             margin="dense"
-                            label="BUSCAR"
+                            label="Buscar apenas valor, ex: 988"
                             type="text"
                             fullWidth
                             onChange={

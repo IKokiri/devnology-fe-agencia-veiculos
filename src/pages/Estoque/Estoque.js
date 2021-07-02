@@ -49,7 +49,7 @@ function Estoque() {
                         <TextField
                             autoFocus
                             margin="dense"
-                            label="BUSCAR"
+                            label="Buscar apenas id_produto :(, ex: 2021-12-30"
                             type="text"
                             fullWidth
                             onChange={

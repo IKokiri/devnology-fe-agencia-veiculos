@@ -196,7 +196,7 @@ function Produto() {
                         <TextField
                             autoFocus
                             margin="dense"
-                            label="BUSCAR"
+                            label="Buscar apenas valor, ex: 9000"
                             type="text"
                             fullWidth
                             onChange={

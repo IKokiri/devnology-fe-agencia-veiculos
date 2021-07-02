@@ -153,7 +153,7 @@ function Modelo() {
                         <TextField
                             autoFocus
                             margin="dense"
-                            label="BUSCAR"
+                            label="Buscar apenas modelo, ex: onix"
                             type="text"
                             fullWidth
                             onChange={

@@ -209,7 +209,7 @@ function Comprar() {
                         <TextField
                             autoFocus
                             margin="dense"
-                            label="BUSCAR"
+                            label="Buscar apenas data, ex: 2021-12-30"
                             type="text"
                             fullWidth
                             onChange={
@@ -272,7 +272,7 @@ function Comprar() {
                         autoFocus
                         margin="dense"
                         id="data_compra"
-                        label="Data Compra"
+                        label="Data Compra AAAA-MM-DD"
                         type="text"
                         fullWidth
                         value={data_compra}

@@ -158,7 +158,7 @@ function Marca() {
                         <TextField
                             autoFocus
                             margin="dense"
-                            label="BUSCAR"
+                            label="Buscar apenas marca, ex: chevrolet"
                             type="text"
                             fullWidth
                             onChange={
